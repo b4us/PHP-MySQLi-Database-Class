@@ -903,6 +903,11 @@ class MysqliDb
         if ($this->isSubQuery) {
             return;
         }
+	    
+        foreach ($tableData as $key => $value) {
+          if($value == "false") $tableData [$key] = (bool) 0;
+          if($value == "true") $tableData [$key] = (bool) 1;
+        }
 
         $this->_query = "UPDATE " . self::$prefix . $tableName;
 
